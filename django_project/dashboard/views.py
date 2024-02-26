@@ -1,5 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+from .models import Job
 
-# Create your views here.
 def dashboard(request):
-    return render(request,'dashboard/dashboard.html')
+    jobs = Job.objects.filter(applicant=request.user)
+
+    context = {
+        'jobs': jobs
+    }
+
+    return render(request, 'dashboard/dashboard.html', context)

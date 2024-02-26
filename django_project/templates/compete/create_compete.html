@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mx-auto" style="width: 40rem">
+        <div class="card-body">
+            <h5 class="card-title mb-3">
+                Create a Competition 
+
+            </h5>
+            
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for ='exampleInputEmail' class="form-label">Competition Title</label>
+                    {% render_field form.title class="form-control" %}
+
+                </div>
+                <div class="mb-3">
+                    <label for ='exampleInputEmail' class="form-label">Prize</label>
+                    {% render_field form.salary class="form-control" %}
+
+                </div>
+                <div class="mb-3">
+                    <label for ='exampleInputEmail' class="form-label">City</label>
+                    {% render_field form.city class="form-control"%}
+
+                </div>
+                <div class="mb-3">
+                    <label for ='exampleInputEmail' class="form-label">Difficulty</label>
+                    {% render_field form.province class="form-control"%}
+
+                </div>
+                <div class="mb-3">
+                    <label for ='exampleInputEmail' class="form-label"> Industry</label>
+                    {% render_field form.industry class="form-control"%}
+
+                </div>
+                <div class="mb-3">
+                    <label for ='exampleInputEmail' class="form-label">Competiton Type</label>
+                    {% render_field form.compete_type class="form-control"%}
+
+                </div>
+                
+                <div class="mb-3">
+                    <label for ='exampleInputEmail' class="form-label">Competition Requirements</label>
+                    {% render_field form.requirements|attr:"rows:2" class="form-control"%}
+
+                </div>
+                <div class="mb-3">
+                    <label for ='exampleInputEmail' class="form-label">Ideal Candidate</label>
+                    {% render_field form.ideal_candidate|attr:"rows:2" class="form-control"%}
+
+                </div>
+                <div class="mb-3">
+                    <label for ='exampleInputEmail' class="form-label">Is this Competition Available</label>
+                    {% render_field form.is_available class="form-check-input"%}
+
+                </div>
+     
+     
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+    </div>
+    
+    </div>
+
+</div>
+
+{% endblock content %}

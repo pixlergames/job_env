@@ -2,6 +2,7 @@
 {% load humanize %}
 {% load widget_tweaks %}
 {% block content%}
+
 <section>
     <div class="p-5 mb-4 bg-light rounded-3">
         <div class = "container-fluid py-5">
@@ -32,6 +33,30 @@
                             <button type="submit" class="btn btn-primary">Search</button>
                         </div>
                     </form>
+                    <form class="row gy-2 gx-3 align-items-center" method = "GET">
+                        <div class="col-sm-2">
+                            <label   for="autoSizingInput">Name</label>
+                            {% render_field compete_filter.form.title id="autoSizingInput"  class="form-control" placeholder="Competition-Keyword"%}
+                        </div>
+                            <div class="col-sm-3">
+                                <label  for="autoSizingSelect">Select Location</label>
+                                {% render_field compete_filter.form.province class="form-select" %}
+                              
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="autoSizingSelect">Choose Competition Type</label>
+                                {% render_field compete_filter.form.compete_type class="form-select" %}
+                              
+                            </div>
+                            <div class="col-sm-3">
+                                <label  for="autoSizingSelect">Select Industry</label>
+                                {% render_field compete_filter.form.industry  class="form-select" %}
+                              
+                            </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <p class="col-md-8 fs-6 mt-3">
@@ -54,6 +79,23 @@
             </div>
             <div class="card-footer">
                 <small class ="text-muted">{{job.timestamp|naturaltime}}</small>
+            </div>
+        </div>
+    </div>
+    <br>
+    {% endfor %}
+     {% for compete in compete_filter.qs  %}
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">{{compete.title}}</h5>
+                <p class="card-text">Industry: {{compete.industry}}</p>
+                <p class="card-text">Competition Type: {{compete.compete_type}}</p>
+                <p class="card-text">Location: {{compete.city}}, {{compete.province}}</p>
+                <p class="card-text">Salary: {{compete.salary}}</p>
+            </div>
+            <div class="card-footer">
+                <small class ="text-muted">{{compete.timestamp|naturaltime}}</small>
             </div>
         </div>
     </div>

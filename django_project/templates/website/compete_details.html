@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+
+<section>
+  <div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+      <h1 class="display-5 fw-bold">{{ compete.title }}</h1>
+      <p class="col-md-8 fs-4">
+        {{ compete.province}} | {{compete.compete_type}} | USD{{ compete.salary|intcomma }} | <b>Participants : </b> {{compete.applycompete_set.all.count}}
+      </p>
+      {% if has_applied == False %}
+      <a href= "{% url 'apply-to-compete' compete.pk %}" class="btn btn-primary btn-lg" type="button">Apply now!</a>
+      {% else %}
+      <p><span class="text-danger">You have already applied for this Competition</span></p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section>
+  <div>
+    <h5>Competition Requirements</h5>
+    <p>{{ compete.requirements|linebreaks }}</p>
+  </div>
+</section>
+
+<section>
+  <h5>Ideal Skills</h5>
+  <p>{{ compete.ideal_candidate |linebreaks }}</p>
+</section>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Other Details</h5>
+        <p class="card-text">
+          {{ compete.description }}
+        </p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">About {{ compete.company.name }}</h5>
+        <p class="card-text">
+          Econet is a leading telecommunications and technology company operating in multiple African countries. With a focus on innovation and customer satisfaction, Econet provides mobile, broadband, and financial services to individuals, businesses, and government organizations. They have been instrumental in bridging the digital divide and promoting digital inclusion in Africa. Through their subsidiary, EcoCash, Econet offers mobile money services, enabling convenient and secure financial transactions. Econet continues to play a vital role in advancing connectivity and empowering communities across the continent.
+        </p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Related Competitions</h5>
+        <p class="card-text">
+          <div class="related-competitions">
+            <div class="list-group">
+              <div class="list-group-item">
+                <h4 class="list-group-item-heading">TechFest Hackathon</h4>
+                <p class="list-group-item-text">Join the TechFest Hackathon and showcase your coding skills. Compete against other talented developers to solve real-world challenges.</p>
+                <p>Date: 2024-03-15</p>
+                <p>Location: City Convention Center</p>
+                <a href="https://www.example.com/techfest-hackathon" class="btn btn-primary">More Information</a>
+              </div>
+              <div class="list-group-item">
+                <h4 class="list-group-item-heading">Innovation Challenge 2024</h4>
+                <p class="list-group-item-text">Participate in the Innovation Challenge 2024 and present your groundbreaking ideas. This competition aims to foster innovation and offers exciting prizes for the winners.</p>
+                <p>Date: 2024-04-10</p>
+                <p>Location: Virtual Event</p>
+                <a href="https://www.example.com/innovation-challenge" class="btn btn-primary">More Information</a>
+              </div>
+              <div class="list-group-item">
+                <h4 class="list-group-item-heading">CodeX Hackathon</h4>
+                <p class="list-group-item-text">CodeX Hackathon brings together developers, designers, and entrepreneurs to create innovative solutions. Collaborate with like-minded individuals and build cutting-edge software applications.</p>
+                <p>Date: 2024-05-20</p>
+                <p>Location: Tech Hub Co-working Space</p>
+                <a href="https://www.example.com/codex-hackathon" class="btn btn-primary">More Information</a>
+              </div>
+            </div>
+          </div>
+        </p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

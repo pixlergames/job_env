@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+
+{%block content%}
+<div  class="card mx-auto" style="width:76rem;">
+    <div class="card-body">
+      <h5 class = "card-title mb-3">Manage Competition</h5>
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+     <th scope="col">Competition Title</th>     
+        <th scope="col">Location</th>      
+          <th scope="col">Prize</th>     
+             <th scope="col">Competition Type</th>
+                   <th scope="col">Industry</th>
+                        <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for compete in compete %}
+          <tr>
+            
+            <td>{{compete.compete.title}}</td>
+            <td>{{compete.compete.city}}. {{compete.compete.province}}</td>
+            <td>{{compete.compete.salary}}</td>
+            <td>{{compete.compete.compete_type}}</td>
+            <td>{{compete.compete.industry}}</td>
+            
+            
+            
+            <td><a href="{% url 'compete-details' compete.compete.pk %}"><small>View Competition</small></a></td>
+          </tr>
+          {% endfor %}
+          
+        </tbody>
+      </table>
+    </div>
+    </div>
+
+{% endblock content%}

@@ -2,7 +2,8 @@ from django.db import models
 from users.models import User
 from company.models import Company
 from resume.models import Resume
-
+from django.conf import settings
+    
 class Province(models.Model):
     name = models.CharField(max_length=100)
     
