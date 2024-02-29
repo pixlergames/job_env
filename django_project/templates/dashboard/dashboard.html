@@ -3,44 +3,62 @@
 {% block content %}
     {% if messages %}
         {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}" role="alert">
-                <b>{{ message }}</b>
+            <div class="alert alert-{{ message.tags }} m-3" role="alert">
+                <strong>{{ message }}</strong>
             </div>
         {% endfor %}
     {% endif %}
 
-    <section>
-        <div class="p-5 mb-4 bg-light rounded-3">
-            <div class="container-fluid py-5">
-                <h1 class="display-5 fw-bold">Welcome to SkillSync Services.</h1>
-                {% if request.user.is_applicant %}
-                    <p class="col-md-8 fs-4">Applicant Dashboard</p>
-                    {% if not request.user.has_resume %}
-                        <div class="alert alert-danger" role="alert">
-                            <b>You are seeing this because you have not created any resume. Create one from <a href="{% url 'update-resume' %}">here</a></b>
-                        </div>
-                    {% else %}
-                        <p class="col-md-8 fs-4">First Name: <b>{{ request.user.resume.first_name }} {{ request.user.resume.surname }}</b></p>
-                        <p class="col-md-8 fs-4">Location: <b>{{ request.user.resume.location }}</b></p>
-                        <p class="col-md-8 fs-4">Title: <b>{{ request.user.resume.job_title }}</b></p>
-                        {% if request.user.resume.upload_resume %}
-                            <p class="col-md-8 fs-4">Resume: <a href="{{ request.user.resume.upload_resume.url }}">Download Resume</a></p>
+    <section class="mt-5">
+        <div class="container">
+            <h1 class="display-5 fw-bold text-center mb-5">Welcome to SkillSync Services.</h1>
+            {% if request.user.is_applicant %}
+                <div class="card mb-5">
+                    <div class="card-body p-5">
+                        <h5 class="card-title mb-4">Applicant Dashboard</h5>
+                        {% if not request.user.has_resume %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>You are seeing this because you have not created any resume. Create one from <a href="{% url 'update-resume' %}">here</a></strong>
+                            </div>
                         {% else %}
-                            <p class="col-md-8 fs-4">Resume: <b>No resume file uploaded.</b></p>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <h6 class="fw-bold mb-3">Personal Information</h6>
+                                    <p class="mb-2"><strong>First Name:</strong> {{ request.user.resume.first_name }}</p>
+                                    <p class="mb-2"><strong>Last Name:</strong> {{ request.user.resume.surname }}</p>
+                                    <p class="mb-2"><strong>Location:</strong> {{ request.user.resume.location }}</p>
+                                    <p class="mb-2"><strong>Title:</strong> {{ request.user.resume.job_title }}</p>
+                                </div>
+                        
+                                <div class="col-md-6">
+                                    <h6 class="fw-bold mb-3">Resume & Applications</h6>
+                                    {% if request.user.resume.upload_resume %}
+                                        <p class="mb-2"><strong>Resume:</strong> <a href="{{ request.user.resume.upload_resume.url }}" class="text-decoration-none">Download Resume</a></p>
+                                    {% else %}
+                                        <p class="text-danger mb-2"><strong>Resume:</strong> No resume file uploaded.</p>
+                                    {% endif %}
+                                    <p class="mb-2"><strong>Number of Competitions:</strong> {{ request.user.applicantprofile.competitions.count }}</p>
+                                    <p class="mb-2"><strong>Submissions Made:</strong> {{ request.user.applicantprofile.submissions.count }}</p>
+                                    <p class="mb-2"><strong>Number of Jobs Applied:</strong> {{ jobs|length }}</p>
+                                </div>
+                            </div>
                         {% endif %}
-                        <p class="col-md-8 fs-4">Number of Competitions: <b>{{ request.user.applicantprofile.competitions.count }}</b></p>
-                        <p class="col-md-8 fs-4">Submissions Made: <b>{{ request.user.applicantprofile.submissions.count }}</b></p>
-                        <p class="col-md-8 fs-4">Number of Jobs Applied: <b>{{ jobs|length }}</b></p>
-                    {% endif %}
-                {% elif request.user.is_recruiter %}
-                    <p class="col-md-8 fs-4">Recruiter Dashboard</p>
-                    {% if not request.user.has_company %}
-                        <div class="alert alert-danger" role="alert">
-                            <b>You are seeing this because you have not created any company. Create one from <a href="{% url 'update-company' %}">here</a></b>
-                        </div>
-                    {% endif %}
-                {% endif %}
-                <button class="btn btn-primary btn-lg" type="button">Example button</button>
+                    </div>
+                </div>
+            {% elif request.user.is_recruiter %}
+                <div class="card mb-5">
+                    <div class="card-body p-5">
+                        <h5 class="card-title mb-4">Recruiter Dashboard</h5>
+                        {% if not request.user.has_company %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>You are seeing this because you have not created any company. Create one from <a href="{% url 'update-company' %}">here</a></strong>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+            <div class="text-center mt-4">
+                <a href="http://localhost:8501/" class="btn btn-primary btn-lg" type="button">SkillSync Analytics</a>
             </div>
         </div>
     </section>
