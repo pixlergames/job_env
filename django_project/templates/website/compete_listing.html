@@ -2,40 +2,43 @@
 {% load humanize %}
 
 {% block content %}
-<section>
-    <div class="p-5 mb-4 bg-light rounded-3">
-        <div class="container-fluid py-5">
-            <h2 class="display-5 fw-bold">Skillsync Services. Showcase your Skills!</h2>
-            <p class="col-md-8 fs-5 mt-3"> All Available Competitions</p>
-        </div>
+
+<!-- Hero Section -->
+<section class="bg-primary text-white text-center py-5 mb-5">
+    <div class="container">
+        <h2 class="display-4 fw-bold">SkillSync Services</h2>
+        <p class="lead">Showcase Your Skills With Our Competitions</p>
     </div>
 </section>
 
+<!-- Competitions Listing -->
 <div class="container">
+    <h3 class="fw-bold mb-4">All Available Competitions</h3>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% if compete %}
             {% for compete in compete %}
                 <div class="col">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ compete.title }}</h5>
-                            <p class="card-text">Location:<strong> {{ compete.city }} </strong></p>
-                            <p class="card-text">Prize: <strong> {{ compete.salary|intcomma }} </strong></p>
-                            <p class="card-text">Difficulty: <strong> {{ compete.province}} </strong></p>
-                            <p class="card-text">Type: <strong> {{compete.compete_type}} </strong> </p>
-                            <!-- Button to view job details -->
-                            <a href="{% url 'compete-details' compete.pk %}" class="btn btn-primary">View Details</a>
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="card-title mb-0">{{ compete.title }}</h5>
                         </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Created {{ compete.timestamp|naturaltime }}</small>
+                        <div class="card-body">
+                            <p class="mb-2"><i class="fas fa-map-marker-alt"></i> Location: <strong>{{ compete.city }}</strong></p>
+                            <p class="mb-2"><i class="fas fa-trophy"></i> Prize: <strong>{{ compete.salary|intcomma }}</strong></p>
+                            <p class="mb-2"><i class="fas fa-puzzle-piece"></i> Difficulty: <strong>{{ compete.province }}</strong></p>
+                            <p class="mb-2"><i class="fas fa-list-alt"></i> Type: <strong>{{ compete.compete_type }}</strong></p>
+                            <a href="{% url 'compete-details' compete.pk %}" class="btn btn-outline-primary mt-3">View Details</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <i class="far fa-clock"></i> Created {{ compete.timestamp|naturaltime }}
                         </div>
                     </div>
                 </div>
             {% endfor %}
+        {% else %}
+            <p>No competitions available at the moment.</p>
         {% endif %}
     </div>
 </div>
-<br>
- 
 
 {% endblock content %}
