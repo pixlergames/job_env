@@ -2,19 +2,20 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<div class="row">
+<div class="container">
+    <div class="row justify-content-center">
     <div class="col-md-6">
-        <div class="card mx-auto" style="width: 40rem">
-        <div class="card-body">
-            <h5 class="card-title mb-3">
+        <div class="card mt-5 shadow-lg bg baby-blue text-dark">
+            <div class="card-body">
+              <h5 class="card-title text-center mb-5">
                 Create a Competition 
-
             </h5>
             
             <form method="POST">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for ='exampleInputEmail' class="form-label">Competition Title</label>
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" data-toggle="tooltip" data-placement="top" title="Check this box if the competition is available">
                     {% render_field form.title class="form-control" %}
 
                 </div>
@@ -34,7 +35,8 @@
 
                 </div>
                 <div class="mb-3">
-                    <label for ='exampleInputEmail' class="form-label"> Industry</label>
+                    <label for="exampleInputEmail" class="form-label">Competition Title</label>
+                    <input type="text" class="form-control" id="exampleInputEmail" placeholder="Enter competition title" data-toggle="tooltip" data-placement="top" title="Enter the title of the competition">
                     {% render_field form.industry class="form-control"%}
 
                 </div>
@@ -59,9 +61,10 @@
                     {% render_field form.is_available class="form-check-input"%}
 
                 </div>
-     
-     
-                <button type="submit" class="btn btn-primary">Create</button>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success">Create</button>
+                    <button type="reset" class="btn btn-primary">Reset</button>
+                  </div>
             </form>
         </div>
     </div>
@@ -69,5 +72,23 @@
     </div>
 
 </div>
-
+{%block style%}
+<style>
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .form-control {
+        padding: 10px;
+    }
+    .mb-3 {
+        margin-bottom: 20px;
+    }
+    .form-control:hover {
+        background-color: #f0f0f0;
+    }
+    
+</style>
+{%endblock style %}
 {% endblock content %}
